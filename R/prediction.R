@@ -59,18 +59,18 @@ mleap_transform <- function(model, data) {
     frame_writer$`MODULE$`$`apply$default$3`(),
     ct)
   
-  parse_mleap_json <- function(x) {
-    col_names <- x$schema$fields %>%
-      purrr::map_chr("name")
-    x$rows %>%
-      purrr::transpose() %>%
-      purrr::set_names(col_names) %>%
-      purrr::map_if(~ !is.list(.x[[1]]), unlist) %>%
-      tibble::as_tibble()
-  }
-  
   frame_writer$toBytes(frame_writer$`toBytes$default$1`())$get() %>%
     rawToChar() %>%
     jsonlite::fromJSON(simplifyVector = FALSE) %>%
     parse_mleap_json()
+}
+
+parse_mleap_json <- function(x) {
+  col_names <- x$schema$fields %>%
+    purrr::map_chr("name")
+  x$rows %>%
+    purrr::transpose() %>%
+    purrr::set_names(col_names) %>%
+    purrr::map_if(~ !is.list(.x[[1]]), unlist) %>%
+    tibble::as_tibble()
 }
