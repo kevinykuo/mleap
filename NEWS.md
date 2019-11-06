@@ -2,6 +2,7 @@
 
 * **Breaking change**: `ml_write_bundle()` now takes the `sample_input` instead of `dataset`.
 * Support MLeap 0.13.0
+* Integer inputs are now supported (#36).
 
 # mleap 0.1.3
 
